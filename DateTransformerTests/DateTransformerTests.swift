@@ -21,6 +21,7 @@ class DateTransformerTests: XCTestCase {
         dateComponents.day = 18
         dateComponents.hour = 19
         dateComponents.minute = 00
+        dateComponents.timeZone = TimeZone(identifier: "en")
         return Calendar(identifier: .gregorian).date(from: dateComponents)!
     }
     
@@ -40,7 +41,6 @@ class DateTransformerTests: XCTestCase {
     }
     
     func testYearFormat_failed() {
-        
         XCTAssertNotEqual(DateTransformer.dateToString(date: mockDate, characteristcs: DateCharacteristcs(format: DateFormats.YYYY.rawValue)), "22222")
     }
     
@@ -153,13 +153,12 @@ class DateTransformerTests: XCTestCase {
 
     //convert date from timestamp to string
     func testStringFromTimeStamp_passed() {
-        XCTAssertNotEqual(DateTransformer.dateFromTimeStamp(timeStamp: mockTimeStamp, characteristcs: DateCharacteristcs(format: DateFormats.DD_MM_YYYY.rawValue)), "18-2-2022")
+        XCTAssertEqual(DateTransformer.dateStringFromTimeStamp(timeStamp: mockTimeStamp, characteristcs: DateCharacteristcs(format: DateFormats.DD_MM_YYYY.rawValue)), "18-02-2022")
     }
     
     func testStringFromTimeStamp_failed() {
-        XCTAssertNotEqual(DateTransformer.dateFromTimeStamp(timeStamp: mockTimeStamp, characteristcs: DateCharacteristcs(format: DateFormats.DD_MM_YYYY.rawValue)), "18-2-2002")
+        XCTAssertNotEqual(DateTransformer.dateStringFromTimeStamp(timeStamp: mockTimeStamp, characteristcs: DateCharacteristcs(format: DateFormats.DD_MM_YYYY.rawValue)), "18-2-2002")
     }
-    
     
     //check if date is before another date
     func testDateIsBeforeAnotherDate_passed() {

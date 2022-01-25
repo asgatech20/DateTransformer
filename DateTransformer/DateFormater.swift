@@ -15,10 +15,21 @@ class DateTransformer {
     /// - timeStamp: timeStamp value to be transformed to date
     /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
     /// - Returns: string representation of the date.
-    static func dateFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> String {
+    static func dateStringFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> String {
         let date = Date(timeIntervalSince1970: timeStamp)
-        let formatter = DateFormatter(characteristcs: characteristcs)
-        return formatter.string(from: date)
+        return dateToString(date: date, characteristcs: characteristcs)
+    }
+    
+    
+    /// Convert date to another date using custom date format.
+    ///
+    /// - Parameters:
+    /// - timeStamp: timeStamp value to be transformed to date
+    /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
+    /// - Returns: date representation of the date.
+    static func dateFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> Date? {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        return stringToDate(string: dateToString(date: date, characteristcs: characteristcs), characteristcs: characteristcs)
     }
     
     
@@ -56,12 +67,10 @@ class DateTransformer {
     /// - identifre: calendar identifre (.gregorian, .islamic, etc...).
     /// - Returns: string representation of the date.
     static func stringToString(string: String, inputCharacteristcs: DateCharacteristcs, outputCharacteristcs: DateCharacteristcs)-> String {
-        var formatter = DateFormatter(characteristcs: inputCharacteristcs)
-        guard let date = formatter.date(from: string) else {
+        guard let date = stringToDate(string: string, characteristcs: inputCharacteristcs) else {
             return "date string or format is not correct."
         }
-        formatter = DateFormatter(characteristcs: outputCharacteristcs)
-        return formatter.string(from: date)
+        return dateToString(date: date, characteristcs: outputCharacteristcs)
     }
     
     
