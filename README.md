@@ -96,3 +96,7 @@ if DateTransformer.isAfter(firstDate: date2, secondDate: date1) {
 }
 
 ```
+
+## Author
+* [Ibrahim Ali](https://github.com/IbrahimAli2017)
+* [Khalid Mahmoud](https://github.com/KhalidZayat)
