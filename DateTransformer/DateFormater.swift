@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DateTransformer {
+public class DateTransformer {
     
     /// Convert date to a string using custom date format.
     ///
@@ -15,7 +15,7 @@ class DateTransformer {
     /// - timeStamp: timeStamp value to be transformed to date
     /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
     /// - Returns: string representation of the date.
-    static func dateStringFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> String {
+    static public func dateStringFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> String {
         let date = Date(timeIntervalSince1970: timeStamp)
         return dateToString(date: date, characteristcs: characteristcs)
     }
@@ -27,7 +27,7 @@ class DateTransformer {
     /// - timeStamp: timeStamp value to be transformed to date
     /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
     /// - Returns: date representation of the date.
-    static func dateFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> Date? {
+    static public func dateFromTimeStamp(timeStamp: Double, characteristcs: DateCharacteristcs) -> Date? {
         let date = Date(timeIntervalSince1970: timeStamp)
         return stringToDate(string: dateToString(date: date, characteristcs: characteristcs), characteristcs: characteristcs)
     }
@@ -39,7 +39,7 @@ class DateTransformer {
     /// - date: date to be transformed
     /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
     /// - Returns: string representation of the date.
-    static func dateToString(date: Date, characteristcs: DateCharacteristcs) -> String {
+    static public func dateToString(date: Date, characteristcs: DateCharacteristcs) -> String {
         let formatter = DateFormatter(characteristcs: characteristcs)
         return formatter.string(from: date)
     }
@@ -51,7 +51,7 @@ class DateTransformer {
     /// - string: string to be transformed
     /// - characteristcs: format of the string representation, calendar identifre,  custom locale.
     /// - Returns: date representation of the string.
-    static func stringToDate(string: String, characteristcs: DateCharacteristcs)-> Date? {
+    static public func stringToDate(string: String, characteristcs: DateCharacteristcs)-> Date? {
         let formatter = DateFormatter(characteristcs: characteristcs)
         let date = formatter.date(from: string)
         return date
@@ -66,7 +66,7 @@ class DateTransformer {
     /// - locale: to fix a custom locale.
     /// - identifre: calendar identifre (.gregorian, .islamic, etc...).
     /// - Returns: string representation of the date.
-    static func stringToString(string: String, inputCharacteristcs: DateCharacteristcs, outputCharacteristcs: DateCharacteristcs)-> String {
+    static public func stringToString(string: String, inputCharacteristcs: DateCharacteristcs, outputCharacteristcs: DateCharacteristcs)-> String {
         guard let date = stringToDate(string: string, characteristcs: inputCharacteristcs) else {
             return "date string or format is not correct."
         }
@@ -81,7 +81,7 @@ class DateTransformer {
     /// - secondDate: second date object
     /// - orEqual: a flage if need to check equality too.
     /// - Returns: bool represntin the check result.
-    static func isBefore(firstDate: Date, secondDate: Date, orEqual: Bool = false) -> Bool {
+    static public func isBefore(firstDate: Date, secondDate: Date, orEqual: Bool = false) -> Bool {
         if orEqual {
             return firstDate <= secondDate
         }
@@ -98,7 +98,7 @@ class DateTransformer {
     /// - secondDateCharacteristcs: characteristcs of string date.
     /// - orEqual: a flage if need to check equality too.
     /// - Returns: bool represntin the check result, return nil if firstDate or secondDate in wrong formate.
-    static func isBefore(firstDate: String, firstDateCharacteristcs: DateCharacteristcs,  secondDate: String, secondDateCharacteristcs: DateCharacteristcs, orEqual: Bool = false) -> Bool? {
+    static public func isBefore(firstDate: String, firstDateCharacteristcs: DateCharacteristcs,  secondDate: String, secondDateCharacteristcs: DateCharacteristcs, orEqual: Bool = false) -> Bool? {
         guard let date1 = stringToDate(string: firstDate, characteristcs: firstDateCharacteristcs) else { return nil }
         
         guard let date2 = stringToDate(string: secondDate, characteristcs: secondDateCharacteristcs) else { return nil }
@@ -116,7 +116,7 @@ class DateTransformer {
     /// - secondDate: second date object
     /// - orEqual: a flage if need to check equality too.
     /// - Returns: bool represntin the check result.
-    static func isAfter(firstDate: Date, secondDate: Date, orEqual: Bool = false) -> Bool {
+    static public func isAfter(firstDate: Date, secondDate: Date, orEqual: Bool = false) -> Bool {
         if orEqual {
             return firstDate >= secondDate
         }
@@ -133,7 +133,7 @@ class DateTransformer {
     /// - secondDateCharacteristcs: characteristcs of string date.
     /// - orEqual: a flage if need to check equality too.
     /// - Returns: bool represntin the check result, return nil if firstDate or secondDate in wrong formate.
-    static func isAfter(firstDate: String, firstDateCharacteristcs: DateCharacteristcs, secondDate: String, secondDateCharacteristcs: DateCharacteristcs, orEqual: Bool = false) -> Bool? {
+    static public func isAfter(firstDate: String, firstDateCharacteristcs: DateCharacteristcs, secondDate: String, secondDateCharacteristcs: DateCharacteristcs, orEqual: Bool = false) -> Bool? {
         guard let date1 = stringToDate(string: firstDate, characteristcs: firstDateCharacteristcs) else { return nil }
         
         guard let date2 = stringToDate(string: secondDate, characteristcs: secondDateCharacteristcs) else { return nil }
@@ -154,13 +154,13 @@ extension DateFormatter {
     }
 }
 
-struct DateCharacteristcs {
+public struct DateCharacteristcs {
     var format: String
     var locale: String = "en"
     var identifier: Calendar.Identifier = .gregorian
 }
 
-enum DateFormats: String {
+public enum DateFormats: String {
     case YYYY = "yyyy" // ex: 2022
     case MM = "MM"  // ex: 12
     case DD = "dd"  // ex: 31
