@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "DateTransformer"
   spec.version      = "1.0.1"
-  spec.source_files = "DateTransformer/**/*.{h,m}"
+  spec.source_files = "DateTransformer/**/*.{h,m,swift}"
   spec.summary      = "A DateTransformer convert date to string using custom formats and visversa."
 
   spec.description  = <<-DESC
